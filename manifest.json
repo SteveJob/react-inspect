@@ -24,8 +24,8 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "css": ["css/inspect.css"],
-      "js": ["scripts/inspect.js"]
+      "css": ["assets/index.css"],
+      "js": ["assets/index.js"]
     }
   ]
 }
