@@ -20,9 +20,9 @@ const config = {
     extensions: ['.jsx', '.js', '.less', '.css', 'scss'],
     alias: {
       frontend: path.resolve(__dirname, 'app/frontend'),
-      frontend: path.resolve(__dirname, 'app/agent'),
-      frontend: path.resolve(__dirname, 'app/plugins'),
-      frontend: path.resolve(__dirname, 'app/backend'),
+      agent: path.resolve(__dirname, 'app/agent'),
+      plugins: path.resolve(__dirname, 'app/plugins'),
+      backend: path.resolve(__dirname, 'app/backend'),
     }
   },
   module: {
