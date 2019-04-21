@@ -17,7 +17,7 @@ const config = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['.jsx', '.less', '.css', 'scss', '.js'],
+    extensions: ['.jsx', '.js', '.less', '.css', 'scss'],
     alias: {
       frontend: path.resolve(__dirname, 'app/frontend'),
       frontend: path.resolve(__dirname, 'app/agent'),
@@ -32,11 +32,11 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
+          presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-flow'],
           plugins: [
             ['import', { libraryName: 'antd', libraryDirectory: 'lib', style: 'css' }],
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-transform-flow-strip-types'
+            '@babel/plugin-transform-flow-strip-types',
+            ['@babel/plugin-proposal-class-properties', { "loose": false }]
           ]
         }
       },

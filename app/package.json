@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "clipboard-js": "^0.3.6",
+    "error-stack-parser": "^2.0.2",
     "events": "^3.0.0",
     "immutable": "^4.0.0-rc.12",
     "lru-cache": "^5.1.1",

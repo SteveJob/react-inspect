@@ -19,6 +19,13 @@ clipboard-js@^0.3.6:
   resolved "http://registry.npm.taobao.org/clipboard-js/download/clipboard-js-0.3.6.tgz#6260add69b5318fde40b80f9d3c8c863efdaf339"
   integrity sha1-YmCt1ptTGP3kC4D508jIY+/a8zk=
 
+error-stack-parser@^2.0.2:
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/error-stack-parser/download/error-stack-parser-2.0.2.tgz#4ae8dbaa2bf90a8b450707b9149dcabca135520d"
+  integrity sha1-Sujbqiv5CotFBwe5FJ3KvKE1Ug0=
+  dependencies:
+    stackframe "^1.0.4"
+
 events@^3.0.0:
   version "3.0.0"
   resolved "http://registry.npm.taobao.org/events/download/events-3.0.0.tgz#9a0a0dfaf62893d92b875b8f2698ca4114973e88"
@@ -130,6 +137,11 @@ regenerator-runtime@^0.13.2:
   version "0.13.2"
   resolved "http://registry.npm.taobao.org/regenerator-runtime/download/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
   integrity sha1-MuWcmm+5saSv8JtJMMotRHc0NEc=
+
+stackframe@^1.0.4:
+  version "1.0.4"
+  resolved "http://registry.npm.taobao.org/stackframe/download/stackframe-1.0.4.tgz#357b24a992f9427cba6b545d96a14ed2cbca187b"
+  integrity sha1-NXskqZL5Qny6a1RdlqFO0svKGHs=
 
 tinycolor2@^1.4.1:
   version "1.4.1"

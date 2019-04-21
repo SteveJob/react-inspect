@@ -10,14 +10,14 @@
  */
 'use strict';
 
-var Agent = require('agent/Agent');
-var ProfileCollector = require('plugins/Profiler/ProfileCollector');
-var TraceUpdatesBackendManager = require('plugins/TraceUpdates/TraceUpdatesBackendManager');
-var Bridge = require('agent/Bridge');
-var setupHighlighter = require('frontend/Highlighter/setup');
-var setupHooksInspector = require('plugins/HooksInspector/backend').default;
-var setupProfiler = require('plugins/Profiler/backend');
-var inject = require('agent/inject');
+var Agent = require('./app/agent/Agent');
+var ProfileCollector = require('./app/plugins/Profiler/ProfileCollector');
+var TraceUpdatesBackendManager = require('./app/plugins/TraceUpdates/TraceUpdatesBackendManager');
+var Bridge = require('./app/agent/Bridge');
+var setupHighlighter = require('./app/frontend/Highlighter/setup');
+var setupHooksInspector = require('./app/plugins/HooksInspector/backend').default;
+var setupProfiler = require('./app/plugins/Profiler/backend');
+var inject = require('./app/agent/inject');
 
 var wall = {
   listen(fn) {

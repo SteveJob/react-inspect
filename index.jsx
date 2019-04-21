@@ -22,7 +22,7 @@ const config = {
   alreadyFoundReact: true,
   showHiddenThemes: true,
   inject(done) {
-    inject('./assets/backend.js', () => {
+    inject('https://modecity-test.oss-cn-hangzhou.aliyuncs.com/backend.js?Expires=1555846731&OSSAccessKeyId=TMP.AgGVFSoXqBYCGR07oHpL_6JKW0pLNERlcCtKpawhosZEidp9opD0vPLJ5JEeAAAwLAIUZyKHpIDWynN0ULdcERmsRKGHhs4CFAQWwGncLv8qlnPSpg7XyvmCXnzN&Signature=TAx0ktY15JOpGBaYZlt0S7YYg%2Bg%3D', () => {
       var wall = {
         listen(fn) {
           window.addEventListener('message', evt => {
@@ -42,6 +42,19 @@ const config = {
 
 const reactInspect = document.createElement('div');
 reactInspect.className = 'react-inspect-menu';
+reactInspect.id = 'app';
 document.body.appendChild(reactInspect);
+
+
+// const inspectIFrame = document.createElement('iframe');
+// document.body.appendChild(inspectIFrame);
+// const reactInspect = inspectIFrame.contentDocument.createElement('div');
+// inspectIFrame.contentDocument.body.appendChild(reactInspect);
+// const link = inspectIFrame.contentDocument.createElement('link');
+// link.href = './assets/index.css';
+// inspectIFrame.contentDocument.body.appendChild(link);
+// const script = inspectIFrame.contentDocument.createElement('script');
+// script.src = './assets/index.js';
+// inspectIFrame.contentDocument.body.appendChild(script);
 
 ReactDOM.render(<App {...config} />, reactInspect);
