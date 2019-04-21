@@ -4,9 +4,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractLess = new ExtractTextPlugin('index.css');
 
-module.exports = {
-  mode: 'development',
-  devtool: 'cheap-source-map',
+const __DEV__ = process.env.NODE_ENV === 'development';
+
+const config = {
+  mode: __DEV__ ? 'development' : 'production',
   entry: {
     index: './index.jsx'
   },
@@ -29,7 +30,6 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        exclude: /node_modules/,
         use: extractLess.extract({
           fallback: 'style-loader',
           use: [
@@ -43,10 +43,23 @@ module.exports = {
             'less-loader'
           ]
         })
+      },
+      {
+        test: /\.css$/,
+        use: extractLess.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
       }
     ]
   },
   plugins: [
     extractLess
   ]
+};
+
+if (__DEV__) {
+  config.devtool = 'cheap-source-map';
 }
+
+module.exports = config;
