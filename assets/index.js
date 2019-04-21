@@ -118,10 +118,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function App(props) {
-  var handleClick = function handleClick() {
-    alert('react inspect');
-  };
-
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       visible = _useState2[0],
@@ -129,7 +125,7 @@ function App(props) {
 
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(antd_lib_popover__WEBPACK_IMPORTED_MODULE_1___default.a, {
     content: react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", null, "Close"),
-    title: "Title",
+    title: "React Tree",
     trigger: "click",
     visible: visible,
     onVisibleChange: setVisible
