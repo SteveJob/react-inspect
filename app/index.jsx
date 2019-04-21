@@ -15,9 +15,9 @@ export default function App(props) {
       visible={visible}
       overlayClassName={css.panel}
       getPopupContainer={() => buttonRef.current}
-      onVisibleChange={setVisible}
+      placement="topLeft"
     >
-      <div className={css.app} ref={buttonRef}>
+      <div className={css.app} ref={buttonRef} onClick={() => setVisible(!visible)}>
         RS
       </div>
     </Popover>

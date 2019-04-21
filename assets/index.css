@@ -2428,9 +2428,9 @@ html {
   cursor: pointer;
   z-index: 9999;
 }
-.panel___1zYen {
-  width: 100vw;
-  height: 400px;
+.panel___1zYen .ant-popover-inner-content {
+  width: 50vw;
+  height: 300px;
   overflow: scroll;
 }
 

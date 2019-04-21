@@ -11272,10 +11272,13 @@ function App(props) {
     getPopupContainer: function getPopupContainer() {
       return buttonRef.current;
     },
-    onVisibleChange: setVisible
+    placement: "topLeft"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: _index_less__WEBPACK_IMPORTED_MODULE_4___default.a.app,
-    ref: buttonRef
+    ref: buttonRef,
+    onClick: function onClick() {
+      return setVisible(!visible);
+    }
   }, "RS"));
 }
 
@@ -42186,7 +42189,7 @@ var config = {
   alreadyFoundReact: true,
   showHiddenThemes: true,
   inject: function inject(done) {
-    _inject('https://modecity-test.oss-cn-hangzhou.aliyuncs.com/backend.js?Expires=1555846731&OSSAccessKeyId=TMP.AgGVFSoXqBYCGR07oHpL_6JKW0pLNERlcCtKpawhosZEidp9opD0vPLJ5JEeAAAwLAIUZyKHpIDWynN0ULdcERmsRKGHhs4CFAQWwGncLv8qlnPSpg7XyvmCXnzN&Signature=TAx0ktY15JOpGBaYZlt0S7YYg%2Bg%3D', function () {
+    _inject('https://modecity-test.oss-cn-hangzhou.aliyuncs.com/backend.js', function () {
       var wall = {
         listen: function listen(fn) {
           window.addEventListener('message', function (evt) {

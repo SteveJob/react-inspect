@@ -1,4 +1,4 @@
-:local(.app) {
+.app {
   position: fixed;
   left: 20px;
   bottom: 80px;
@@ -14,8 +14,10 @@
   z-index: 9999;
 }
 
-:local(.panel) {
-  width: 100vw;
-  height: 400px;
-  overflow: scroll;
+.panel {
+  :global(.ant-popover-inner-content) {
+    width: 50vw;
+    height: 300px;
+    overflow: scroll;
+  }
 }

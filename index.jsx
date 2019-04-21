@@ -22,7 +22,7 @@ const config = {
   alreadyFoundReact: true,
   showHiddenThemes: true,
   inject(done) {
-    inject('https://modecity-test.oss-cn-hangzhou.aliyuncs.com/backend.js?Expires=1555846731&OSSAccessKeyId=TMP.AgGVFSoXqBYCGR07oHpL_6JKW0pLNERlcCtKpawhosZEidp9opD0vPLJ5JEeAAAwLAIUZyKHpIDWynN0ULdcERmsRKGHhs4CFAQWwGncLv8qlnPSpg7XyvmCXnzN&Signature=TAx0ktY15JOpGBaYZlt0S7YYg%2Bg%3D', () => {
+    inject('https://modecity-test.oss-cn-hangzhou.aliyuncs.com/backend.js', () => {
       var wall = {
         listen(fn) {
           window.addEventListener('message', evt => {
