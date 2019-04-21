@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Popover } from 'antd';
 import css from './index.less';
-import 'antd/dist/antd.css';
 
 export default function App(props) {
   const handleClick = () => {

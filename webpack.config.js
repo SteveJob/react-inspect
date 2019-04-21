@@ -25,11 +25,15 @@ const config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env', '@babel/preset-react']
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: [
+            ['import', { libraryName: 'antd', libraryDirectory: 'lib', style: 'css' }]
+          ]
         }
       },
       {
         test: /\.less$/,
+        exclude: /node_modules/,
         use: extractLess.extract({
           fallback: 'style-loader',
           use: [
