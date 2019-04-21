@@ -17,7 +17,7 @@ var getIn = require('./getIn');
 var performanceNow = require('fbjs/lib/performanceNow');
 
 // Use the polyfill if the function is not native implementation
-function getWindowFunction(name, polyfill): Function {
+function getWindowFunction(name, polyfill) {
   if (String(window[name]).indexOf('[native code]') === -1) {
     return polyfill;
   }
@@ -48,47 +48,6 @@ var requestIdleCallback = getWindowFunction('requestIdleCallback', function(cb, 
     lastRunTimeMS = (endTime - startTime) / 1000;
   }, delayMS);
 });
-
-type AnyFn = (...x: any) => any;
-export type Wall = {
-  listen: (fn: (data: PayloadType) => void) => void,
-  send: (data: PayloadType) => void,
-};
-
-type IdleDeadline = {
-  didTimeout: bool,
-  timeRemaining: () => number,
-};
-
-type EventPayload = {
-  type: 'event',
-  cleaned: ?Array<Array<string>>,
-  evt: string,
-  data: any,
-};
-
-type PayloadType = {
-  type: 'inspect',
-  id: string,
-  path: Array<string>,
-  callback: number,
-} | {
-  type: 'many-events',
-  events: Array<EventPayload>,
-} | {
-  type: 'call',
-  name: string,
-  args: Array<any>,
-  callback: number,
-} | {
-  type: 'callback',
-  id: number,
-  args: Array<any>,
-} | {
-  type: 'pause',
-} | {
-  type: 'resume',
-} | EventPayload;
 
 /**
  * The bridge is responsible for serializing requests between the Agent and
@@ -147,17 +106,17 @@ type PayloadType = {
  * up.
  */
 class Bridge {
-  _buffer: Array<{evt: string, data: any}>;
-  _cbs: Map<number, Function>;
-  _cid: number;
-  _inspectables: Map<string, Object>;
-  _listeners: {[key: string]: Array<(data: any) => void>};
-  _flushHandle: ?number;
-  _wall: Wall;
-  _callers: {[key: string]: AnyFn};
-  _paused: boolean;
+  _buffer;
+  _cbs;
+  _cid;
+  _inspectables;
+  _listeners;
+  _flushHandle;
+  _wall;
+  _callers;
+  _paused;
 
-  constructor(wall: Wall) {
+  constructor(wall) {
     this._cbs = new Map();
     this._inspectables = new Map();
     this._cid = 0;
@@ -171,7 +130,7 @@ class Bridge {
     wall.listen(this._handleMessage.bind(this));
   }
 
-  inspect(id: string, path: Array<string>, cb: (val: any) => any) {
+  inspect(id, path, cb) {
     var _cid = this._cid++;
     this._cbs.set(_cid, (data, cleaned, proto, protoclean) => {
       if (cleaned.length) {
@@ -194,7 +153,7 @@ class Bridge {
     });
   }
 
-  call(name: string, args: Array<any>, cb: (val: any) => any) {
+  call(name, args, cb) {
     var _cid = this._cid++;
     this._cbs.set(_cid, cb);
 
@@ -206,7 +165,7 @@ class Bridge {
     });
   }
 
-  onCall(name: string, handler: (data: any) => any) {
+  onCall(name, handler) {
     if (this._callers[name]) {
       throw new Error('only one call handler per call name allowed');
     }
@@ -225,7 +184,7 @@ class Bridge {
     });
   }
 
-  setInspectable(id: string, data: Object) {
+  setInspectable(id, data) {
     var prev = this._inspectables.get(id);
     if (!prev) {
       this._inspectables.set(id, data);
@@ -234,7 +193,7 @@ class Bridge {
     this._inspectables.set(id, {...prev, ...data});
   }
 
-  send(evt: string, data: any) {
+  send(evt, data) {
     this._buffer.push({evt, data});
     this.scheduleFlush();
   }
@@ -256,7 +215,7 @@ class Bridge {
     }
   }
 
-  flushBufferWhileIdle(deadline: IdleDeadline) {
+  flushBufferWhileIdle(deadline) {
     this._flushHandle = null;
 
     // Magic numbers were determined by tweaking in a heavy UI and seeing
@@ -282,7 +241,7 @@ class Bridge {
     }
   }
 
-  flushBufferSlice(bufferSlice: Array<{evt: string, data: any}>) {
+  flushBufferSlice(bufferSlice) {
     var events = bufferSlice.map(({evt, data}) => {
       var cleaned = [];
       var san = dehydrate(data, cleaned);
@@ -294,11 +253,11 @@ class Bridge {
     this._wall.send({type: 'many-events', events});
   }
 
-  forget(id: string) {
+  forget(id) {
     this._inspectables.delete(id);
   }
 
-  on(evt: string, fn: AnyFn) {
+  on(evt, fn) {
     if (!this._listeners[evt]) {
       this._listeners[evt] = [fn];
     } else {
@@ -306,7 +265,7 @@ class Bridge {
     }
   }
 
-  off(evt: string, fn: AnyFn) {
+  off(evt, fn) {
     if (!this._listeners[evt]) {
       return;
     }
@@ -316,7 +275,7 @@ class Bridge {
     }
   }
 
-  once(evt: string, fn: AnyFn) {
+  once(evt, fn) {
     var self = this;
     var listener = function() {
       fn.apply(this, arguments);
@@ -325,7 +284,7 @@ class Bridge {
     this.on(evt, listener);
   }
 
-  _handleMessage(payload: PayloadType) {
+  _handleMessage(payload) {
     if (payload.type === 'resume') {
       this._paused = false;
       this.scheduleFlush();
@@ -383,7 +342,7 @@ class Bridge {
     }
   }
 
-  _handleCall(name: string, args: Array<any>, callback: number) {
+  _handleCall(name, args, callback) {
     if (!this._callers[name]) {
       console.warn('unknown call: "' + name + '"');
       return;
@@ -403,7 +362,7 @@ class Bridge {
     });
   }
 
-  _inspectResponse(id: string, path: Array<string>, callback: number) {
+  _inspectResponse(id, path, callback) {
     var inspectable = this._inspectables.get(id);
     var result = {};
     var cleaned = [];

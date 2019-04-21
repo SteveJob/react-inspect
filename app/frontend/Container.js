@@ -18,46 +18,18 @@ var PreferencesPanel = require('./PreferencesPanel');
 var SplitPane = require('./SplitPane');
 var TabbedPane = require('./TabbedPane');
 
-import type MenuItem from './ContextMenu';
-import type {Theme} from './types';
-
-type Props = {
-  reload?: () => void,
-  extraPanes: Array<(node: Object) => React.Node>,
-  extraTabs: ?{[key: string]: () => React.Node},
-  menuItems: {
-    tree?: (id: string, node: Object, store: Object) => ?Array<MenuItem>,
-    attr?: (
-      id: string,
-      node: Object,
-      val: any,
-      path: Array<string>,
-      name: string,
-      store: Object
-    ) => ?Array<MenuItem>,
-  },
-  extraTabs: {[key: string]: () => React.Node},
-  preferencesPanelShown: boolean,
-  theme: Theme,
-  onViewElementSource: null | (id: string, node: Object) => void,
-};
-
-type State = {
-  isVertical: boolean,
-};
-
 var IS_VERTICAL_BREAKPOINT = 500;
 
 function shouldUseVerticalLayout(window) {
   return window.innerWidth < IS_VERTICAL_BREAKPOINT;
 }
 
-class Container extends React.Component<Props, State> {
+class Container extends React.Component {
   // eslint shouldn't error on type positions. TODO: update eslint
   // eslint-disable-next-line no-undef
-  resizeTimeout: ?TimeoutID;
+  resizeTimeout;
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -80,14 +52,14 @@ class Container extends React.Component<Props, State> {
   }
 
   // $FlowFixMe future versions of Flow can infer this
-  handleResize = (e: Event): void => {
+  handleResize = (e) => {
     if (!this.resizeTimeout) {
       this.resizeTimeout = setTimeout(this.handleResizeTimeout, 50);
     }
   };
 
   // $FlowFixMe future versions of Flow can infer this
-  handleResizeTimeout = (): void => {
+  handleResizeTimeout = () => {
     this.resizeTimeout = null;
 
     this.setState({
@@ -175,7 +147,7 @@ var DEFAULT_MENU_ITEMS = {
   },
 };
 
-const containerStyle = (preferencesPanelShown: boolean, theme: Theme) => ({
+const containerStyle = (preferencesPanelShown, theme) => ({
   backgroundColor: theme.base00,
   color: theme.base05,
   flex: 1,

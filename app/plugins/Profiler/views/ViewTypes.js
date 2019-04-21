@@ -8,12 +8,7 @@
  *
  * @flow
  */
+
 'use strict';
 
-module.exports = {
-  name: Symbol('name'),
-  type: Symbol('type'),
-  inspected: Symbol('inspected'),
-  meta: Symbol('meta'),
-  proto: Symbol('proto'),
-};
+export type Chart = 'flamegraph' | 'interactions' | 'ranked';

@@ -8,15 +8,12 @@
  *
  * @flow
  */
-'use strict';
-
-import type {Hook} from './types';
 
 /**
  * NOTE: This file cannot `require` any other modules. We `.toString()` the
  *       function in some places and inject the source into the page.
  */
-function installGlobalHook(window: Object) {
+function installGlobalHook(window) {
   if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
     return;
   }
@@ -222,7 +219,7 @@ function installGlobalHook(window: Object) {
     },
   });
   Object.defineProperty(window, '__REACT_DEVTOOLS_GLOBAL_HOOK__', {
-    value: (hook : Hook),
+    value: hook,
   });
 }
 

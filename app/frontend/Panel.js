@@ -29,67 +29,24 @@ const ThemeStore = require('./Themes/Store');
 
 const consts = require('../agent/consts');
 
-import type {Theme} from './types';
-import type {DOMEvent} from './types';
-import type {Wall} from '../agent/Bridge';
-
-export type Props = {
-  alreadyFoundReact: boolean,
-  browserName?: string,
-  showInspectButton?: boolean,
-  showHiddenThemes?: boolean,
-  themeName?: string,
-  inject: (done: (wall: Wall, onDisconnect?: () => void) => void) => void,
-  preferencesPanelShown?: boolean,
-
-  // if alreadyFoundReact, then these don’t need to be passed
-  checkForReact?: (cb: (isReact: boolean) => void) => void,
-  reload?: () => void,
-
-  // optionals
-  showComponentSource?: (
-    globalPathToInst: string,
-    globalPathToType: string,
-  ) => void,
-  showElementSource?: (
-    source: Object
-  ) => void,
-
-  reloadSubscribe?: (reloadFn: () => void) => () => void,
-  showAttrSource?: (path: Array<string>) => void,
-  executeFn?: (path: Array<string>) => void,
-  selectElement?: (id: string, bridge: Bridge) => void,
-  getNewSelection?: (bridge: Bridge) => void,
-};
-
-type DefaultProps = {};
-type State = {
-  loading: boolean,
-  isReact: boolean,
-  preferencesPanelShown: boolean,
-  themeKey: number,
-  themeName: ?string,
-  showTroubleshooting: boolean,
-};
-
-class Panel extends React.Component<Props, State> {
-  _teardownWall: ?() => void;
-  _keyListener: ?(e: DOMEvent) => void;
+class Panel extends React.Component {
+  _teardownWall;
+  _keyListener;
   // eslint shouldn't error on type positions. TODO: update eslint
   // eslint-disable-next-line no-undef
-  _checkTimeout: ?TimeoutID;
-  _troubleshootingTimeout: ?TimeoutID; // eslint-disable-line no-undef
-  _unMounted: boolean;
-  _bridge: Bridge;
-  _store: Store;
-  _themeStore: ThemeStore;
-  _unsub: ?() => void;
+  _checkTimeout;
+  _troubleshootingTimeout; // eslint-disable-line no-undef
+  _unMounted;
+  _bridge;
+  _store;
+  _themeStore;
+  _unsub;
   // TODO: typecheck plugin interface
-  plugins: Array<any>;
+  plugins;
 
-  defaultProps: DefaultProps;
+  defaultProps;
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
     this.state = {
       loading: true,
@@ -104,7 +61,7 @@ class Panel extends React.Component<Props, State> {
     this.plugins = [];
   }
 
-  getChildContext(): Object {
+  getChildContext() {
     return {
       browserName: this.props.browserName || '',
       defaultThemeName: this._themeStore && this._themeStore.defaultThemeName || '',
@@ -181,7 +138,7 @@ class Panel extends React.Component<Props, State> {
     this._store.hideHighlight();
   }
 
-  sendSelection(id: string) {
+  sendSelection(id) {
     if (!this._bridge || (!id && !this._store.selected)) {
       return;
     }
@@ -190,7 +147,7 @@ class Panel extends React.Component<Props, State> {
     this.props.selectElement(id || this._store.selected, this._bridge);
   }
 
-  viewComponentSource(id: string) {
+  viewComponentSource(id) {
     if (!this._bridge) {
       return;
     }
@@ -204,7 +161,7 @@ class Panel extends React.Component<Props, State> {
     }, 100);
   }
 
-  viewElementSource(id: string, source: Object) {
+  viewElementSource(id, source) {
     if (!this._bridge) {
       return;
     }
@@ -272,7 +229,7 @@ class Panel extends React.Component<Props, State> {
     });
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
+  componentDidUpdate(prevProps, prevState) {
     if (!this.state.isReact) {
       if (!this._checkTimeout) {
         this._checkTimeout = setTimeout(() => {
@@ -427,13 +384,13 @@ var panelRNStyle = (bridge, supportsMeasure, theme) => (node, id) => {
   );
 };
 
-const containerStyle = (theme: Theme) => ({
+const containerStyle = (theme) => ({
   borderTop: `1px solid ${theme.base01}`,
   padding: '0.25rem',
   marginBottom: '0.25rem',
   flexShrink: 0,
 });
-const loadingStyle = (theme: Theme) => ({
+const loadingStyle = (theme) => ({
   fontFamily: sansSerif.family,
   fontSize: sansSerif.sizes.large,
   textAlign: 'center',

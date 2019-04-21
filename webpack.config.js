@@ -9,14 +9,21 @@ const __DEV__ = process.env.NODE_ENV === 'development';
 const config = {
   mode: __DEV__ ? 'development' : 'production',
   entry: {
-    index: './index.jsx'
+    index: './index.jsx',
+    backend: './backend.js'
   },
   output: {
     path: path.resolve(__dirname, 'assets/'),
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['.jsx', '.less', '.css', 'scss', '.js']
+    extensions: ['.jsx', '.less', '.css', 'scss', '.js'],
+    alias: {
+      frontend: path.resolve(__dirname, 'app/frontend'),
+      frontend: path.resolve(__dirname, 'app/agent'),
+      frontend: path.resolve(__dirname, 'app/plugins'),
+      frontend: path.resolve(__dirname, 'app/backend'),
+    }
   },
   module: {
     rules: [
@@ -27,7 +34,9 @@ const config = {
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react'],
           plugins: [
-            ['import', { libraryName: 'antd', libraryDirectory: 'lib', style: 'css' }]
+            ['import', { libraryName: 'antd', libraryDirectory: 'lib', style: 'css' }],
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-transform-flow-strip-types'
           ]
         }
       },

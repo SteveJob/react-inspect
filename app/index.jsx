@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Popover } from 'antd';
+import Panel from './frontend/Panel';
 import css from './index.less';
 
 export default function App(props) {
@@ -7,7 +8,7 @@ export default function App(props) {
 
   return (
     <Popover
-      content={<a>Close</a>}
+      content={<Panel {...props} />}
       title="React Tree"
       trigger="click"
       visible={visible}
