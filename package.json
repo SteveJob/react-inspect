@@ -1,0 +1,19 @@
+{
+  "name": "react-inspect",
+  "version": "1.0.0",
+  "description": "react inspect chrome plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "inspect"
+  ],
+  "author": "Steve",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}

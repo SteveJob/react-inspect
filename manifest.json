@@ -1,0 +1,31 @@
+{
+  "name": "ReactInspect",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Inspect Your React App.",
+  "icons": {
+    "128": "icon.jpeg"
+  },
+  "permissions": [
+    "http://*.modecity.com/", 
+    "https://*.modecity.com/"
+  ],
+  "browser_action": {
+    "default_title": "ReactInspect",
+    "default_icon": "icon.jpeg",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "css": ["css/inspect.css"],
+      "js": ["scripts/inspect.js"]
+    }
+  ]
+}
