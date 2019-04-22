@@ -2415,18 +2415,23 @@ html {
 }
 .app___3Ih2q {
   position: fixed;
-  left: 20px;
-  bottom: 80px;
+  left: 15px;
+  bottom: 60px;
   width: 40px;
   height: 40px;
-  background-color: brown;
+  background-color: #ed2200;
   border-radius: 50%;
   color: white;
   text-align: center;
-  padding-top: 10px;
+  line-height: 40px;
+  font-size: 14px;
+  font-style: bolder;
   box-sizing: border-box;
   cursor: pointer;
-  z-index: 9999;
+  z-index: 10000001;
+}
+.panel___1zYen {
+  z-index: 10000001;
 }
 .panel___1zYen .ant-popover-inner-content {
   width: 50vw;
