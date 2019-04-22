@@ -76,7 +76,7 @@ module.exports = function(options: Options, Component: any): any {
       }
       this._listeners = options.listeners(this.props, this.context[storeKey]);
       this._listeners.forEach(evt => {
-        this.context[storeKey].on(evt, this._update);
+        this.context[storeKey].on(evt, this._update); // store 监听 Node id
       });
     }
 

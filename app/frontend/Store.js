@@ -499,7 +499,7 @@ class Store extends EventEmitter {
     this.showCopyableInput = null;
     this.selected = id;
     if (oldSel) {
-      this.emit(oldSel);
+      this.emit(oldSel); // 触发 WrapNode.cWM 里的监听事件
     }
     if (id) {
       this.emit(id);

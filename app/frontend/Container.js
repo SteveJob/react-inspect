@@ -153,6 +153,7 @@ const containerStyle = (preferencesPanelShown, theme) => ({
   flex: 1,
   display: 'flex',
   minWidth: 0,
+  height: 300,
   position: preferencesPanelShown ? 'relative' : null,
 });
 

@@ -1795,6 +1795,7 @@ var containerStyle = function containerStyle(preferencesPanelShown, theme) {
     flex: 1,
     display: 'flex',
     minWidth: 0,
+    height: 300,
     position: preferencesPanelShown ? 'relative' : null
   };
 };
@@ -7123,7 +7124,7 @@ function (_EventEmitter) {
       this.selected = id;
 
       if (oldSel) {
-        this.emit(oldSel);
+        this.emit(oldSel); // 触发 WrapNode.cWM 里的监听事件
       }
 
       if (id) {
@@ -10266,7 +10267,8 @@ module.exports = function (options, Component) {
         this._listeners = options.listeners(this.props, this.context[storeKey]);
 
         this._listeners.forEach(function (evt) {
-          _this2.context[storeKey].on(evt, _this2._update);
+          _this2.context[storeKey].on(evt, _this2._update); // store 监听 Node id
+
         });
       }
     }, {
