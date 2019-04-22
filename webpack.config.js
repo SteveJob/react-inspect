@@ -59,9 +59,26 @@ const config = {
       },
       {
         test: /\.css$/,
+        include: /node_modules/,
         use: extractLess.extract({
           fallback: 'style-loader',
           use: 'css-loader'
+        })
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: extractLess.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[local]___[hash:base64:5]',
+              }
+            }
+          ]
         })
       }
     ]
